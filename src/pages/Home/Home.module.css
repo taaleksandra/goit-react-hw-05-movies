@@ -1,0 +1,10 @@
+.movieLink {
+  text-decoration: none;
+  color: black;
+  line-height: 1.5rem;
+  font-weight: 500;
+}
+
+.movieLink:hover {
+  color: blueviolet;
+}
