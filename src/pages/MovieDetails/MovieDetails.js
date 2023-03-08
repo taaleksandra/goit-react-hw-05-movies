@@ -6,7 +6,6 @@ import { ButtonBack } from 'components/ButtonBack/ButtonBack';
 
 export const MovieDetails = () => {
   const location = useLocation();
-  console.log(location);
 
   return (
     <>
@@ -15,14 +14,14 @@ export const MovieDetails = () => {
       <div className={clsx(css.linksBox)}>
         <Link
           to="cast"
-          state={{ from: location }}
+          state={{ movieList: location.state.from || location.state.movieList }}
           className={clsx(css.linkMore)}
         >
           Cast
         </Link>
         <Link
           to="reviews"
-          state={{ from: location }}
+          state={{ movieList: location.state.from || location.state.movieList }}
           className={clsx(css.linkMore)}
         >
           Reviews

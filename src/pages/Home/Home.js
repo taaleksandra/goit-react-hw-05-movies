@@ -1,18 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import css from '../Home/Home.module.css';
 
-export const Home = ({ titlesArr }) => {
+export const Home = ({ trening }) => {
+  const location = useLocation();
+
   return (
-    <ul>
-      {titlesArr.map(title => (
-        <li key={title}>
-          <Link to="/movies/:movieId" className={clsx(css.movieLink)}>
-            {title}
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <>
+      <h1>Trending movies</h1>
+      <ul>
+        {trening.map(movie => (
+          <li key={movie.id}>
+            <Link
+              to="/movies/:movieId"
+              state={{ from: location }}
+              className={clsx(css.movieLink)}
+            >
+              {movie.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };

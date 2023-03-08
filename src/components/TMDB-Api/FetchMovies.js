@@ -9,3 +9,11 @@ export const fetchTrending = async () => {
 
   return response.data.results;
 };
+
+export const fetchSearch = async (searchQuery, pageNumber) => {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchQuery}&page=${pageNumber}&include_adult=false`
+  );
+
+  return response.data.results;
+};

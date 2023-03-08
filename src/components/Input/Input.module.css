@@ -1,0 +1,30 @@
+.input {
+  height: 29px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.btnSearch {
+  margin-left: 20px;
+  width: 90px;
+  cursor: pointer;
+  border: none;
+  padding: 10px 20px;
+  background-color: rgb(219, 208, 230);
+  color: blueviolet;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btnSearch:hover {
+  background-color: blueviolet;
+  color: white;
+}
+
+.btnSearch:active {
+  box-shadow: 12px 3px 54px -23px rgba(0, 0, 0, 0.75) inset;
+  -webkit-box-shadow: 12px 3px 54px -23px rgba(0, 0, 0, 0.75) inset;
+  -moz-box-shadow: 12px 3px 54px -23px rgba(0, 0, 0, 0.75) inset;
+}
