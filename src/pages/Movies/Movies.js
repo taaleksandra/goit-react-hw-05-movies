@@ -1,11 +1,19 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { fetchTrending } from 'components/TMDB-Api/FetchMovies';
+import { Link } from 'react-router-dom';
 
-export const Movies = () => {
+import clsx from 'clsx';
+import css from '../Movies/Movies.module.css';
+
+export const Movies = ({ titlesArr }) => {
   return (
-    <div>
-      <p>Hello world! That's the movies page</p>
-    </div>
+    <ul>
+      {titlesArr.map(title => (
+        <li key={title}>
+          <Link to="/movies/:movieId" className={clsx(css.movieLink)}>
+            {title}
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 };

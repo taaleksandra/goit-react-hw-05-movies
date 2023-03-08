@@ -1,0 +1,15 @@
+.linksBox {
+  display: flex;
+  gap: 10px;
+}
+
+.linkMore {
+  text-decoration: none;
+  color: black;
+  line-height: 1.5rem;
+  font-weight: 500;
+}
+
+.linkMore:hover {
+  color: blueviolet;
+}

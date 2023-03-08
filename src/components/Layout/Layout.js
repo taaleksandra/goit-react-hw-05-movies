@@ -20,7 +20,7 @@ export const Layout = ({ children }) => {
           </Link>
         </nav>
       </header>
-      {children}
+      <main className={clsx(css.main)}>{children}</main>
     </>
   );
 };
