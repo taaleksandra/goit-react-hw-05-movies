@@ -1,3 +1,15 @@
+.movieBox {
+  display: flex;
+  gap: 20px;
+  padding-top: 16px;
+  padding-bottom: 40px;
+  max-width: 60vw;
+}
+
+.descBox {
+  margin-top: 40px;
+}
+
 .linksBox {
   display: flex;
   gap: 10px;

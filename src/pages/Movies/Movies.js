@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import css from '../Movies/Movies.module.css';
 import { ButtonLoadMore } from '../../components/ButtonLoadMore/ButtonLoadMore';
 
-export const Movies = ({ data, children, onhandleLoadMore }) => {
+export const Movies = ({ data, children, onhandleLoadMore, onClinkMovie }) => {
   const location = useLocation();
 
   return (
@@ -13,11 +13,13 @@ export const Movies = ({ data, children, onhandleLoadMore }) => {
       {children}
       <ul>
         {data.map(movie => (
-          <li id={movie.id} key={movie.id}>
+          <li key={movie.id}>
             <Link
+              id={movie.id}
               to="/movies/:movieId"
               state={{ from: location }}
               className={clsx(css.movieLink)}
+              onClick={onClinkMovie}
             >
               {movie.title}
             </Link>

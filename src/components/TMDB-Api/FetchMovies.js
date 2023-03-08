@@ -17,3 +17,27 @@ export const fetchSearch = async (searchQuery, pageNumber) => {
 
   return response.data.results;
 };
+
+export const fetchDetails = async movieId => {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`
+  );
+
+  return response.data;
+};
+
+export const fetchCast = async movieId => {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}&language=en-US`
+  );
+
+  return response.data.cast;
+};
+
+export const fetchReviews = async movieId => {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${apiKey}&language=en-US`
+  );
+
+  return response.data.results;
+};
