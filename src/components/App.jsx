@@ -38,14 +38,3 @@ export const App = () => {
     </Layout>
   );
 };
-
-// <Layout>
-//   <Routes>
-//     <Route path="/" element={<Home titlesArr={titles} />} />
-//     <Route path="/movies" element={<Movies titlesArr={titles} />} />
-//     <Route path="/movies/:movieId" element={<MovieDetails />}>
-//       <Route path="cast" element={<Cast />} />
-//       <Route path="reviews" element={<Reviews />} />
-//     </Route>
-//   </Routes>
-// </Layout>;

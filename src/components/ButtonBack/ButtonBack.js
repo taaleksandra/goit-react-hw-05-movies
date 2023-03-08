@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { useEffect } from 'react';
-import { fetchTrending } from 'components/TMDB-Api/FetchMovies';
-
 import clsx from 'clsx';
 import css from '../ButtonBack/ButtonBack.module.css';
 

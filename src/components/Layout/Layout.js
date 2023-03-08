@@ -1,8 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
-
-import { PropTypes } from 'prop-types';
 
 import css from '../Layout/Layout.module.css';
 import { Link } from './Active.styled';
