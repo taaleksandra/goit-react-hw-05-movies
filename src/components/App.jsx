@@ -162,8 +162,17 @@ export const App = () => {
     setReviews([]);
 
     try {
-      const reviewsData = await fetchReviews(movieId);
-      console.log(reviewsData);
+      const movieReviews = await fetchReviews(movieId);
+      const reviewsData = [];
+      movieReviews.map(review => {
+        const reviewData = {
+          author: review.author,
+          content: review.content,
+        };
+
+        reviewsData.push(reviewData);
+      });
+      setReviews(reviewsData);
     } catch (err) {
       console.error(err);
     } finally {
@@ -201,7 +210,7 @@ export const App = () => {
           }
         >
           <Route path="cast" element={<Cast cast={cast} />} />
-          <Route path="reviews" element={<Reviews />} />
+          <Route path="reviews" element={<Reviews reviews={reviews} />} />
         </Route>
       </Routes>
     </Layout>
