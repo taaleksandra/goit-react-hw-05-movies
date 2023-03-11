@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/290.5cc4cc67.chunk.css","mappings":"AAAA,uBAEE,UAAY,CAEZ,eAAgB,CADhB,kBAAmB,CAFnB,oBAIF,CAEA,6BACE,aACF","sources":["pages/Home/Home.module.css"],"sourcesContent":[".movieLink {\n  text-decoration: none;\n  color: black;\n  line-height: 1.5rem;\n  font-weight: 500;\n}\n\n.movieLink:hover {\n  color: blueviolet;\n}\n"],"names":[],"sourceRoot":""}
