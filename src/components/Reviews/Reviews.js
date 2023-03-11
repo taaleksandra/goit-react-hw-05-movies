@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { fetchReviews } from 'components/TMDB-Api/FetchMovies';
+import { Loader } from 'components/Loader/Loader';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -49,6 +50,7 @@ const Reviews = () => {
         ))}
         {reviews.length === 0 && <p>There is no reviews</p>}
       </ul>
+      {isLoading && <Loader />}
     </div>
   );
 };

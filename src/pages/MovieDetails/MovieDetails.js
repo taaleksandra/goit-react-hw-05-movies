@@ -6,8 +6,9 @@ import css from '../MovieDetails/MovieDetails.module.css';
 
 import { fetchDetails } from 'components/TMDB-Api/FetchMovies';
 import { ButtonBack } from 'components/ButtonBack/ButtonBack';
+import { Loader } from 'components/Loader/Loader';
 
-const MovieDetails = ({ onClinkCast, onClinkReviews }) => {
+const MovieDetails = () => {
   const location = useLocation();
 
   const [details, setDetails] = useState({});
@@ -67,12 +68,13 @@ const MovieDetails = ({ onClinkCast, onClinkReviews }) => {
           </div>
         </div>
       </div>
+      {isLoading && <Loader />}
+
       <div className={clsx(css.linksBox)}>
         <Link
           to="cast"
           state={{ movieList: location.state.from || location.state.movieList }}
           className={clsx(css.linkMore)}
-          onClick={onClinkCast}
         >
           Cast
         </Link>
@@ -80,7 +82,6 @@ const MovieDetails = ({ onClinkCast, onClinkReviews }) => {
           to="reviews"
           state={{ movieList: location.state.from || location.state.movieList }}
           className={clsx(css.linkMore)}
-          onClick={onClinkReviews}
         >
           Reviews
         </Link>

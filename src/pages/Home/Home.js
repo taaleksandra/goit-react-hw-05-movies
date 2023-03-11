@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import css from '../Home/Home.module.css';
 
 import { fetchTrending } from '../../components/TMDB-Api/FetchMovies';
+import { Loader } from 'components/Loader/Loader';
 
 const Home = ({ onClinkMovie }) => {
   const location = useLocation();
@@ -56,6 +57,7 @@ const Home = ({ onClinkMovie }) => {
           </li>
         ))}
       </ul>
+      {isLoading && <Loader />}
     </>
   );
 };

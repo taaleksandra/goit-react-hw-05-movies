@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import css from '../Cast/Cast.module.css';
 
 import { fetchCast } from 'components/TMDB-Api/FetchMovies';
+import { Loader } from 'components/Loader/Loader';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -56,6 +57,7 @@ const Cast = () => {
           </li>
         ))}
       </ul>
+      {isLoading && <Loader />}
     </div>
   );
 };
