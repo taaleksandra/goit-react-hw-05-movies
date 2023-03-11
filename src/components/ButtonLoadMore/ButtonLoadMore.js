@@ -1,7 +1,7 @@
 import React from 'react';
-import clsx from 'clsx';
 import { PropTypes } from 'prop-types';
 
+import clsx from 'clsx';
 import css from '../ButtonLoadMore/ButtonLoadMore.module.css';
 
 export const ButtonLoadMore = ({ onClick }) => (
