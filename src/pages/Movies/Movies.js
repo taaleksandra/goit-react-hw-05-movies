@@ -21,32 +21,6 @@ const Movies = () => {
   const searchQuery = searchParams.get('query');
 
   // obsługa wyszukiwania filmów na stronie movies
-  const handleSearchMovie = async () => {
-    setIsLoading(true);
-    setPageNumber(1);
-    // setSearchQuery(searchQuery);
-
-    try {
-      const movies = await fetchSearch(searchQuery, 1);
-      // console.log(movies);
-      const moviesData = [];
-      movies.map(movie => {
-        const movieData = {
-          title: movie.original_title,
-          id: movie.id,
-        };
-        moviesData.push(movieData);
-      });
-
-      setSearchMoviesData(moviesData);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-      setPageNumber(pageNumber + 1);
-    }
-  };
-
   const handleSubmit = searchQuery => {
     setSearchParams({ query: searchQuery });
   };
@@ -55,6 +29,22 @@ const Movies = () => {
     if (searchQuery === null) {
       return;
     }
+
+    const handleSearchMovie = async () => {
+      setIsLoading(true);
+      setPageNumber(1);
+
+      try {
+        const movies = await fetchSearch(searchQuery, 1);
+        setSearchMoviesData(movies);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+        setPageNumber(p => p + 1);
+      }
+    };
+
     handleSearchMovie();
   }, [searchQuery]);
 
@@ -64,15 +54,7 @@ const Movies = () => {
 
     try {
       const nextMovies = await fetchSearch(searchQuery, pageNumber);
-      const nextMoviesData = [];
-      nextMovies.map(movie => {
-        const movieData = {
-          title: movie.original_title,
-          id: movie.id,
-        };
-        nextMoviesData.push(movieData);
-      });
-      setSearchMoviesData(searchMoviesData.concat(nextMoviesData));
+      setSearchMoviesData(searchMoviesData.concat(nextMovies));
     } catch (err) {
       console.error(err);
     } finally {
@@ -85,19 +67,18 @@ const Movies = () => {
     <>
       <Input onSubmit={handleSubmit} />
       <ul>
-        {searchMoviesData.length !== 0 &&
-          searchMoviesData.map(movie => (
-            <li key={movie.id}>
-              <Link
-                id={movie.id}
-                to={`/movies/${movie.id}`}
-                state={{ from: location }}
-                className={clsx(css.movieLink)}
-              >
-                {movie.title}
-              </Link>
-            </li>
-          ))}
+        {searchMoviesData.map(movie => (
+          <li key={movie.id}>
+            <Link
+              id={movie.id}
+              to={`/movies/${movie.id}`}
+              state={{ from: location }}
+              className={clsx(css.movieLink)}
+            >
+              {movie.original_title}
+            </Link>
+          </li>
+        ))}
       </ul>
       {isLoading && <Loader />}
       {searchMoviesData.length > 0 && (

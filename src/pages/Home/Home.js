@@ -7,7 +7,7 @@ import css from '../Home/Home.module.css';
 import { fetchTrending } from '../../components/TMDB-Api/FetchMovies';
 import { Loader } from 'components/Loader/Loader';
 
-const Home = ({ onClinkMovie }) => {
+const Home = () => {
   const location = useLocation();
 
   const [trending, setTrending] = useState([]);
@@ -19,15 +19,7 @@ const Home = ({ onClinkMovie }) => {
 
     try {
       const movies = await fetchTrending();
-      const moviesData = [];
-      movies.map(movie => {
-        const movieData = {
-          title: movie.original_title,
-          id: movie.id,
-        };
-        moviesData.push(movieData);
-      });
-      setTrending(moviesData);
+      setTrending(movies);
     } catch (err) {
       console.error(err);
     } finally {
@@ -43,19 +35,22 @@ const Home = ({ onClinkMovie }) => {
     <>
       <h1>Trending movies</h1>
       <ul>
-        {trending.map(movie => (
-          <li key={movie.id}>
-            <Link
-              id={movie.id}
-              to={`/movies/${movie.id}`}
-              state={{ from: location }}
-              className={clsx(css.movieLink)}
-              onClick={onClinkMovie}
-            >
-              {movie.title}
-            </Link>
-          </li>
-        ))}
+        {trending.length === 0 ? (
+          <p>There are no movies</p>
+        ) : (
+          trending.map(movie => (
+            <li key={movie.id}>
+              <Link
+                id={movie.id}
+                to={`/movies/${movie.id}`}
+                state={{ from: location }}
+                className={clsx(css.movieLink)}
+              >
+                {movie.original_title}
+              </Link>
+            </li>
+          ))
+        )}
       </ul>
       {isLoading && <Loader />}
     </>
