@@ -14,32 +14,22 @@ const Cast = () => {
   const { movieId } = useParams();
 
   // obsługa zapytania o obsadę filmu
-  const handleCast = async () => {
-    setIsLoading(true);
-    setCast([]);
-
-    try {
-      const movieCast = await fetchCast(Number(movieId));
-      const castData = [];
-      movieCast.map(actor => {
-        const actorData = {
-          id: actor.id,
-          name: actor.name,
-          character: actor.character,
-          photo: 'https://image.tmdb.org/t/p/w200/' + actor.profile_path,
-        };
-        castData.push(actorData);
-      });
-
-      setCast(castData);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const handleCast = async () => {
+      setIsLoading(true);
+      setCast([]);
+
+      try {
+        const movieCast = await fetchCast(Number(movieId));
+        setCast(movieCast);
+        console.log(movieCast);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     handleCast();
   }, [movieId]);
 
@@ -47,15 +37,22 @@ const Cast = () => {
     <div>
       <h3>Cast</h3>
       <ul>
-        {cast.map(actor => (
-          <li className={clsx(css.castItem)} key={actor.name}>
-            <img src={actor.photo} alt={actor.name} />
-            <div className={clsx(css.actor)}>
-              <p>Name: {actor.name}</p>
-              <p>Character: {actor.character}</p>
-            </div>
-          </li>
-        ))}
+        {cast.length === 0 ? (
+          <p>There is no cast</p>
+        ) : (
+          cast.map(actor => (
+            <li className={clsx(css.castItem)} key={actor.name}>
+              <img
+                src={`https://image.tmdb.org/t/p/w200/${actor.profile_path}`}
+                alt={actor.name}
+              />
+              <div className={clsx(css.actor)}>
+                <p>Name: {actor.name}</p>
+                <p>Character: {actor.character}</p>
+              </div>
+            </li>
+          ))
+        )}
       </ul>
       {isLoading && <Loader />}
     </div>

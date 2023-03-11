@@ -16,37 +16,25 @@ const MovieDetails = () => {
 
   const { movieId } = useParams();
 
-  const { id, title, poster, score, overview, genres } = details;
-  const hrefToPoster = `https://image.tmdb.org/t/p/w300/${poster}`;
+  const { title, poster_path, vote_average, overview, genres } = details;
+  const hrefToPoster = `https://image.tmdb.org/t/p/w300/${poster_path}`;
 
   // obsługa zapytania o szczegóły filmu
-  const handleMovieDetails = async () => {
-    setIsLoading(true);
-
-    try {
-      const clickedMovieDetails = await fetchDetails(movieId);
-
-      const genresArr = [];
-      clickedMovieDetails.genres.map(genre => {
-        genresArr.push(genre.name);
-      });
-
-      setDetails({
-        id: clickedMovieDetails.id,
-        title: clickedMovieDetails.original_title,
-        poster: clickedMovieDetails.poster_path,
-        score: clickedMovieDetails.vote_average,
-        overview: clickedMovieDetails.overview,
-        genres: genresArr.join(', '),
-      });
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   useEffect(() => {
+    const handleMovieDetails = async () => {
+      setIsLoading(true);
+
+      try {
+        const clickedMovieDetails = await fetchDetails(movieId);
+        setDetails(clickedMovieDetails);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     handleMovieDetails();
   }, [movieId]);
 
@@ -57,17 +45,24 @@ const MovieDetails = () => {
         <img src={hrefToPoster} alt={title} />
         <div>
           <h3>{title}</h3>
-          <p>User score: {score}</p>
+          <p>User score: {vote_average}</p>
           <div className={clsx(css.descBox)}>
             <h4>OVERVIEW</h4>
             <p>{overview}</p>
           </div>
           <div className={clsx(css.descBox)}>
             <h4>GENRES</h4>
-            <p>{genres}</p>
+            <ul>
+              {!genres ? (
+                <></>
+              ) : (
+                genres.map(genre => <li key={genre.id}>{genre.name}</li>)
+              )}
+            </ul>
           </div>
         </div>
       </div>
+      <div>DETAILS</div>
       {isLoading && <Loader />}
 
       <div className={clsx(css.linksBox)}>

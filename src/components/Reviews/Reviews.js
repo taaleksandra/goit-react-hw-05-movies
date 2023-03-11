@@ -11,30 +11,21 @@ const Reviews = () => {
   const { movieId } = useParams();
 
   // obsługa zapytania o reviews filmu
-  const handleReviews = async () => {
-    setIsLoading(true);
-    setReviews([]);
-
-    try {
-      const movieReviews = await fetchReviews(movieId);
-      const reviewsData = [];
-      movieReviews.map(review => {
-        const reviewData = {
-          author: review.author,
-          content: review.content,
-        };
-
-        reviewsData.push(reviewData);
-      });
-      setReviews(reviewsData);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const handleReviews = async () => {
+      setIsLoading(true);
+      setReviews([]);
+
+      try {
+        const movieReviews = await fetchReviews(movieId);
+        setReviews(movieReviews);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     handleReviews();
   }, [movieId]);
 
@@ -42,13 +33,16 @@ const Reviews = () => {
     <div>
       <h3>Reviews</h3>
       <ul>
-        {reviews.map(review => (
-          <li key={review.author}>
-            <p>Author: {review.author}</p>
-            <p>{review.content}</p>
-          </li>
-        ))}
-        {reviews.length === 0 && <p>There is no reviews</p>}
+        {reviews.length === 0 ? (
+          <p>There is no reviews</p>
+        ) : (
+          reviews.map(review => (
+            <li key={review.id}>
+              <p>Author: {review.author}</p>
+              <p>{review.content}</p>
+            </li>
+          ))
+        )}
       </ul>
       {isLoading && <Loader />}
     </div>
